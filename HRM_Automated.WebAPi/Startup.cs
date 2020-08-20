@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -57,7 +58,9 @@ namespace HRM_Automated.WebAPi
 						return result;
 					};
 
-				});
+				}); 
+			services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDBContext>()
+					 .AddDefaultTokenProviders();
 			services.AddDbContextPool<ApplicationDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationAPIDB")));
 			services.AddSwaggerGen();
 			services.AddSwaggerGenNewtonsoftSupport();
@@ -75,10 +78,10 @@ namespace HRM_Automated.WebAPi
 				app.UseDeveloperExceptionPage();
 				app.UseExceptionHandler("/error-local-development");
 			}
-			else
-			{
-				app.UseExceptionHandler("/error");
-			}
+			//else
+			//{
+			//	app.UseExceptionHandler("/error");
+			//}
 
 			app.UseSwagger();
 			app.UseSwaggerUI(c =>

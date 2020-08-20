@@ -7,7 +7,7 @@ using System.Text;
 
 namespace System.Standard.Models.DataModels
 {
-	public partial class Employee : BaseModel
+	public partial class Employee : BaseModel, IPSeudoDeletable
 	{
 		public string Name { get; set; }
 		public string PhoneNumber { get; set; }
@@ -24,6 +24,8 @@ namespace System.Standard.Models.DataModels
 		{
 			get { return EmployeeUniqeId = string.Format($"EMP/{CodeGenerator.EmployeeShorCode}"); }
 		}
+
+		public bool Delete { get; set; }
 
 		//Employee file creator: TO DO
 	}

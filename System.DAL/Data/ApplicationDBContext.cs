@@ -15,7 +15,13 @@ namespace System.Standard.DAL.Data
 		{
 		}
 
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
+			base.OnModelCreating(builder);	
+		}
+
 		public DbSet<Employee> Employees { get; set; }
+		public DbSet<ApplicationUserExtended> ApplicationUsers { get; set; }
 
 	}
 }
