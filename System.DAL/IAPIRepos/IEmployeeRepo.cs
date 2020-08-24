@@ -11,6 +11,7 @@ namespace System.Standard.DAL.IAPIRepos
 	public partial interface IEmployeeRepo : IDisposable, IAdminRepository<Employee>
 	{
 		Task<IEnumerable<Employee>> GetEmployees();
+		Task<Employee> GetEmployeeById(Guid id);
 		Task<Employee> GetEmployeeByName(string serchByName);
 		Task<Employee> GetEmployeeByEmail(string serchByEmail);
 		Task<Employee> GetEmployeeByPhone(string serchByPhone);

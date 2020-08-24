@@ -30,6 +30,10 @@ namespace System.Standard.DAL.APIRepos
 			return result.Entity;
 		}
 
+		public async Task<Employee> GetEmployeeById(Guid id)
+		{
+			return await appDbContex.Employees.FirstOrDefaultAsync(e => e.Id.Equals(id));
+		}
 		public async Task<Employee> GetEmployeeByEmail(string serchByEmail)
 		{
 			return await appDbContex.Employees.SingleOrDefaultAsync(e => e.Email.Equals(serchByEmail));

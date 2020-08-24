@@ -1,0 +1,50 @@
+﻿@model Employee
+@{ Layout = "_Layout"; ViewBag.Title = "Get employee by Id";}
+
+<h2>Get Reservation by Id <a asp-action="Index" class="btn btn-sm btn-primary">Back</a></h2>
+<form method="post">
+	<div class="form-group">
+		<label for="id">Id:</label>
+		<input class="form-control" name="id" />
+	</div>
+	<div class="text-center panel-body">
+		<button type="submit" class="btn btn-sm btn-primary">Get Reservation</button>
+	</div>
+</form>
+
+@if (Model != null)
+{
+	<h2>Employee</h2>
+	<table class="table table-sm table-striped table-bordered m-2">
+		<thead>
+			<tr>
+				<th>@Html.DisplayNameFor(e => e.Name)</th>
+				<th>@Html.DisplayNameFor(e => e.PhoneNumber)</th>
+				<th>@Html.DisplayNameFor(e => e.EmergencyContactNumber)</th>
+				<th>@Html.DisplayNameFor(e => e.Email)</th>
+				<th>@Html.DisplayNameFor(e => e.ContactAddress)</th>
+				<th>@Html.DisplayNameFor(e => e.PreviousPlaceOfWork)</th>
+				<th>@Html.DisplayNameFor(e => e.PreviousSalaryEarned)</th>
+				<th>@Html.DisplayNameFor(e => e.CurrentStatus)</th>
+				<th>@Html.DisplayNameFor(e => e.MaritalStatus)</th>
+				<th>@Html.DisplayNameFor(e => e.EmployeeUniqeId)</th>
+				<th>@Html.DisplayNameFor(e => e.DateOfEmployment)</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>@Model.Name</td>
+				<td>@Model.PhoneNumber</td>
+				<td>@Model.EmergencyContactNumber</td>
+				<td>@Model.Email</td>
+				<td>@Model.ContactAddress</td>
+				<td>@Model.PreviousPlaceOfWork</td>
+				<td>@Model.PreviousSalaryEarned</td>
+				<td>@Model.CurrentStatus</td>
+				<td>@Model.MaritalStatus</td>
+				<td>@Model.EmployeeUniqeId</td>
+				<td>@Model.DateOfEmployment</td>
+			</tr>
+		</tbody>
+	</table>
+}

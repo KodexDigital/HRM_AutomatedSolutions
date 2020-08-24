@@ -22,4 +22,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HRM_Automated.DTO\HRM_Automated.DTO.csproj" />
+    <ProjectReference Include="..\System.Standard.Utility\System.Standard.Utility.csproj" />
+  </ItemGroup>
+
 </Project>
