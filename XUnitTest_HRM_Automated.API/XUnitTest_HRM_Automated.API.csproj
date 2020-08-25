@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HRM_Automated\HRM_Automated.csproj" />
     <ProjectReference Include="..\System.DAL\System.Standard.DAL.csproj" />
   </ItemGroup>
 

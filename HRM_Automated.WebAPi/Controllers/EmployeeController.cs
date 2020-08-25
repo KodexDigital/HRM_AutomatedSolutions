@@ -13,6 +13,7 @@ namespace HRM_Automated.WebAPi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    //[Authorize] //securing with jwt: protected by jtw bearer
     public class EmployeeController : ControllerBase
     {
         private readonly IWrapper wrapper;

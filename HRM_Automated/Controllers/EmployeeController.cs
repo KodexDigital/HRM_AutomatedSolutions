@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Standard.Utility.Api;
 using System.Standard.Utility.Globals;
 using System.Text;
 using System.Threading.Tasks;
+using HRM_Automated.Authentication.JWT;
 using HRM_Automated.DTO.Data;
+using HRM_Automated.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -26,17 +29,43 @@ namespace HRM_Automated.Controllers
         }
 
         /// <summary>
-        /// Dispalying all employee from the endpoint 
+        /// Dispalying all employee from the endpoint  before jwt token authorization
         /// </summary>
         /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             using var client = HttpConnect.client;
+            //Adding security permisions
+            //var securityToken = GenerateRandomToken.RandomToken();
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", securityToken);
             using var response = await client.GetAsync(EndpointConnect.BaseAddress + EndpointConnect.GetAllEmployee);
             responseResult = await response.Content.ReadAsStringAsync();
             employeesList = JsonConvert.DeserializeObject<IEnumerable<EmployeeDTO>>(responseResult);
             return View(employeesList);
         }
+
+
+        ///Applying jwt Toke security
+
+        //[HttpGet]
+        //public ViewResult Index() => View();
+
+        //[HttpPost]
+        //public async Task<IActionResult> Index(string username, string password)
+        //{
+        //    if ((username != "secrete") || (password != "secrete"))
+        //        return View((object)"Wrong username or password");
+
+        //    var tokenString = GenerateJwtToken.GetToken();
+
+        //    using var client = HttpConnect.client;
+        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenString);
+        //    using var response = await client.GetAsync(EndpointConnect.BaseAddress + EndpointConnect.GetAllEmployee);
+        //    responseResult = await response.Content.ReadAsStringAsync();
+        //    employeesList = JsonConvert.DeserializeObject<IEnumerable<EmployeeDTO>>(responseResult);
+        //    return View(employeesList);
+        //}
+
 
 
         public ViewResult GetEmployee() => View();

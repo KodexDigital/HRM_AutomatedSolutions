@@ -9,7 +9,9 @@ using System.Standard.DAL.Admin.Repos;
 using System.Standard.DAL.APIRepos;
 using System.Standard.DAL.Data;
 using System.Standard.DAL.IAPIRepos;
+using System.Text;
 using System.Threading.Tasks;
+using HRM_Automated.WebAPi.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +23,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -39,15 +42,32 @@ namespace HRM_Automated.WebAPi
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddAuthentication(options =>
-			{
-				options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-				options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-			}).AddJwtBearer(blocker => 
-			{
-				blocker.Authority = $"https://{Configuration["Auth0:Domain"]}";
-				blocker.Audience = Configuration["Auth0:Audience"];
-			});
+			//Middleware for jwt beater authentication
+			services.AddTokenAuthentication(Configuration);
+			//services.AddAuthentication(options =>
+			//{
+			//	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+			//	options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+			//	options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+			//}).AddJwtBearer(blocker => 
+			//{
+			//	//this is for Auth)
+			//	//blocker.Authority = $"https://{Configuration["Auth0:Domain"]}";
+			//	//blocker.Audience = Configuration["Auth0:Audience"];
+
+			//	//for jwt bearee
+			//	blocker.SaveToken = true;
+			//	blocker.RequireHttpsMetadata = false;
+			//	blocker.TokenValidationParameters = new TokenValidationParameters()
+			//	{
+			//		ValidateIssuer = true,
+			//		ValidateAudience = true,
+			//		ValidAudience = Configuration["Auth_APi:Audience"],
+			//		ValidIssuer = Configuration["Auth_APi:Issuer"],
+			//		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MynameisJamesBond007")) // move the key to config afte testing
+			//	};
+
+			//});
 			services.AddControllers(options =>
 			{
 				options.RespectBrowserAcceptHeader = true;
